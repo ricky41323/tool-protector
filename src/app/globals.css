@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --background: #f8f9fa;
+  --foreground: #202124;
+  --primary: #1a73e8;
+  --primary-hover: #1b66c9;
+  --border: #dfe1e5;
+  --border-hover: #d7d9dd;
+  --shadow-hover: 0 1px 6px rgba(32, 33, 36, 0.28);
+  --error: #ea4335;
+  --success: #34a853;
+  --card-bg: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #202124;
+    --foreground: #e8eaed;
+    --primary: #8ab4f8;
+    --primary-hover: #9bbff9;
+    --border: #5f6368;
+    --border-hover: #80868b;
+    --shadow-hover: 0 1px 6px rgba(255, 255, 255, 0.1);
+    --error: #f28b82;
+    --success: #81c995;
+    --card-bg: #303134;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+}
+
+.logo {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  letter-spacing: -1.5px;
+  background: linear-gradient(45deg, #4285f4, #ea4335, #fbbc05, #34a853);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  user-select: none;
+}
+
+.search-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.search-input-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 10px 20px;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.search-input-wrapper:hover,
+.search-input-wrapper.active {
+  box-shadow: var(--shadow-hover);
+  border-color: transparent;
+}
+
+.search-icon {
+  color: #9aa0a6;
+  margin-right: 12px;
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 1rem;
+  color: var(--foreground);
+  font-family: inherit;
+}
+
+.button-container {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.btn {
+  background-color: var(--background);
+  border: 1px solid var(--background);
+  color: var(--foreground);
+  font-family: inherit;
+  font-size: 0.9rem;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  border-color: var(--border);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  color: var(--foreground);
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+  color: white;
+}
+
+.result-card {
+  margin-top: 30px;
+  width: 100%;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: var(--card-bg);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid var(--border);
+}
+
+.result-success {
+  color: var(--success);
+  border-left: 4px solid var(--success);
+}
+
+.result-error {
+  color: var(--error);
+  border-left: 4px solid var(--error);
+}
+
+.loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+.loading-dark {
+  border-color: rgba(0, 0, 0, 0.1);
+  border-top-color: var(--primary);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+footer {
+  margin-top: 50px;
+  font-size: 0.8rem;
+  color: #70757a;
+}
