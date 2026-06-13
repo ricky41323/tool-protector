@@ -11,7 +11,7 @@ export default function Home() {
   // 비밀번호 인증 상태
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [passwordInput, setPasswordInput] = useState("");
-  const SITE_PASSWORD = "1234"; // 여기에 원하는 비밀번호를 설정하세요.
+  const SITE_PASSWORD = "db1004"; // 여기에 원하는 비밀번호를 설정하세요.
 
   const handleSearch = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
