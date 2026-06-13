@@ -7,6 +7,11 @@ export default function Home() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
   const [matchedItems, setMatchedItems] = useState<string[]>([]);
+  
+  // 비밀번호 인증 상태
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [passwordInput, setPasswordInput] = useState("");
+  const SITE_PASSWORD = "1234"; // 여기에 원하는 비밀번호를 설정하세요.
 
   const handleSearch = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
@@ -45,6 +50,39 @@ export default function Home() {
     setMessage("");
     setMatchedItems([]);
   };
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (passwordInput === SITE_PASSWORD) {
+      setIsAuthenticated(true);
+    } else {
+      alert("비밀번호가 틀렸습니다.");
+      setPasswordInput("");
+    }
+  };
+
+  if (!isAuthenticated) {
+    return (
+      <main className="container" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', minHeight: '100vh', alignItems: 'center' }}>
+        <h1 className="logo">Tool Protector</h1>
+        <p style={{ marginBottom: '20px', color: '#5f6368' }}>서비스에 접근하려면 비밀번호를 입력하세요.</p>
+        <form className="search-container" onSubmit={handleLogin} style={{ width: '100%', maxWidth: '400px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
+          <input 
+            type="password" 
+            className="search-input" 
+            placeholder="비밀번호" 
+            value={passwordInput}
+            onChange={(e) => setPasswordInput(e.target.value)}
+            style={{ width: '100%', padding: '15px 20px', borderRadius: '24px', border: '1px solid #dfe1e5', textAlign: 'center', fontSize: '1rem' }}
+            autoFocus
+          />
+          <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '12px', borderRadius: '24px', fontSize: '1rem' }}>
+            입장하기
+          </button>
+        </form>
+      </main>
+    );
+  }
 
   return (
     <>
