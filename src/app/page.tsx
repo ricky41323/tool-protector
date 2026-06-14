@@ -64,7 +64,7 @@ export default function Home() {
   if (!isAuthenticated) {
     return (
       <main className="container" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', minHeight: '100vh', alignItems: 'center' }}>
-        <h1 className="logo">Tool Protector</h1>
+        <h1 className="logo">Tool<br/>Protector</h1>
         <p style={{ marginBottom: '20px', color: '#5f6368' }}>서비스에 접근하려면 비밀번호를 입력하세요.</p>
         <form className="search-container" onSubmit={handleLogin} style={{ width: '100%', maxWidth: '400px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
           <input 
@@ -87,7 +87,7 @@ export default function Home() {
   return (
     <>
       <main className="container">
-        <h1 className="logo">Tool Protector</h1>
+        <h1 className="logo">Tool<br/>Protector</h1>
         
         <form className="search-container" onSubmit={handleSearch}>
           <div className={`search-input-wrapper ${query ? 'active' : ''}`}>
@@ -97,7 +97,7 @@ export default function Home() {
             <input 
               type="text" 
               className="search-input" 
-              placeholder="명단에서 확인할 이름을 입력하세요" 
+              placeholder="명단에서 확인할 도구를 입력하세요" 
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               autoFocus
