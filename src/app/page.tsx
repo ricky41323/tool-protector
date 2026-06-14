@@ -31,11 +31,11 @@ export default function Home() {
       if (res.ok) {
         if (data.exists) {
           setStatus("success");
-          setMessage(`✅ '${query}' 님은 명단에 존재합니다.`);
+          setMessage(`✅ '${query}' 은(는) 명단에 존재합니다.`);
           if (data.matchedLines) setMatchedItems(data.matchedLines);
         } else {
           setStatus("error");
-          setMessage(`❌ '${query}' 님을 찾을 수 없습니다.`);
+          setMessage(`❌ '${query}' 을(를) 찾을 수 없습니다.`);
         }
       } else {
         setStatus("error");
