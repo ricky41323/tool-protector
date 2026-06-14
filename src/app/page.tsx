@@ -11,7 +11,6 @@ export default function Home() {
   // 비밀번호 인증 상태
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [passwordInput, setPasswordInput] = useState("");
-  const SITE_PASSWORD = "db1004"; // 여기에 원하는 비밀번호를 설정하세요.
 
   const handleSearch = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
@@ -22,7 +21,11 @@ export default function Home() {
     setMatchedItems([]);
 
     try {
-      const res = await fetch(`/api/search?name=${encodeURIComponent(query)}`);
+      const res = await fetch("/api/search", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: query, password: passwordInput })
+      });
       const data = await res.json();
 
       if (res.ok) {
@@ -51,13 +54,22 @@ export default function Home() {
     setMatchedItems([]);
   };
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (passwordInput === SITE_PASSWORD) {
-      setIsAuthenticated(true);
-    } else {
-      alert("비밀번호가 틀렸습니다.");
-      setPasswordInput("");
+    try {
+      const res = await fetch("/api/search", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "verify", password: passwordInput })
+      });
+      if (res.ok) {
+        setIsAuthenticated(true);
+      } else {
+        alert("비밀번호가 틀렸습니다.");
+        setPasswordInput("");
+      }
+    } catch {
+      alert("서버 연결에 실패했습니다.");
     }
   };
 

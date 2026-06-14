@@ -7,15 +7,24 @@ export const revalidate = 0;
 const notion = new NotionAPI();
 const PAGE_ID = "3166d79fd1ad813286abf9aba88d4638";
 
-export async function GET(request: NextRequest) {
-  const searchParams = request.nextUrl.searchParams;
-  const name = searchParams.get("name");
+const SITE_PASSWORD = "db1004"; // 서버에만 저장되는 비밀번호
 
-  if (!name) {
-    return NextResponse.json({ error: "이름을 입력해주세요." }, { status: 400 });
-  }
-
+export async function POST(request: NextRequest) {
   try {
+    const body = await request.json();
+    const { action, name, password } = body;
+
+    if (password !== SITE_PASSWORD) {
+      return NextResponse.json({ error: "비밀번호가 틀렸습니다." }, { status: 401 });
+    }
+
+    if (action === "verify") {
+      return NextResponse.json({ success: true });
+    }
+
+    if (!name) {
+      return NextResponse.json({ error: "이름을 입력해주세요." }, { status: 400 });
+    }
     // 1. Fetch the public Notion page using the unofficial client (no API key needed)
     const pageData = await notion.getPage(PAGE_ID);
     const blocks = Object.values(pageData.block).map((b: any) => b.value?.value);
